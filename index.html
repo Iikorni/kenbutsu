@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kenbutsu viewer</title>
+    </head>
+    <body>
+        <div style="text-align:center;">
+            <h1>kenbutsu</h1>
+            <canvas id="viewer" name="viewer" width="600" height="600"></canvas>
+            <script>
+                const canvas = document.getElementById("viewer");
+                const ctx = canvas.getContext("2d");
+
+                var margin = 25;
+                var columnWidth = 24;
+                var lineCount = 19;
+
+                var columnCount = lineCount - 1;
+
+                var width = (columnWidth * columnCount) + (margin * 2);
+                var height = width;
+
+                var tx = ((600 - width)/2);
+                var ty = ((600 - height)/2);
+
+                var bx = tx + width;
+                var by = ty + height;
+
+                ctx.fillRect(0,0,600,600);
+                ctx.fillStyle = "#DFA462"
+                ctx.fillRect(tx,ty,width,height);
+
+                var lc = 0
+                for(var i = tx+margin;i <= bx-margin;i += columnWidth) {
+                    ctx.beginPath();
+                    ctx.moveTo(i, ty+margin);
+                    ctx.lineTo(i, by-margin);
+                    ctx.closePath();
+                    ctx.stroke();
+                }
+
+                for(var i = ty+margin;i <= by-margin;i+= columnWidth) {
+                    ctx.beginPath();
+                    ctx.moveTo(tx+margin, i);
+                    ctx.lineTo(bx-margin, i);
+                    ctx.closePath();
+                    ctx.stroke();
+                }
+
+                if(lineCount == 19) {
+                    placeStarPoint(4,4);
+                    placeStarPoint(10,4);
+                    placeStarPoint(16,4);
+                    placeStarPoint(4,10);
+                    placeStarPoint(10,10);
+                    placeStarPoint(16,10);
+                    placeStarPoint(4,16);
+                    placeStarPoint(10,16);
+                    placeStarPoint(16,16);
+                }
+
+                function getPoint(x, y) {
+                    var centreX = margin + tx + (columnWidth * (x));
+                    var centreY = margin + ty + (columnWidth * (y));
+                    return [centreX, centreY];
+                }
+                
+
+                function placeStarPoint(x, y) {
+                    var pos = getPoint(x,y);
+                    var oldFill = ctx.fillStyle;
+                    ctx.fillStyle = "black";
+                    ctx.beginPath();
+                    ctx.arc(pos[0], pos[1], (columnWidth/8), 0, Math.PI*2, false);
+                    ctx.fill();
+                    ctx.fillStyle = oldFill;
+                }
+
+                function placeStone(p, colour) {
+                    var pos = getPoint(p[0],p[1]);
+                    var oldFill = ctx.fillStyle;
+                    ctx.fillStyle = colour;
+                    ctx.beginPath();
+                    ctx.arc(pos[0], pos[1], (columnWidth/2), 0, Math.PI*2, false);
+                    ctx.fill();
+                    ctx.fillStyle = oldFill;
+                }
+
+                const MOVE_LOOKUP = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+
+                function getMoveFromText(text) {
+                    return [MOVE_LOOKUP.indexOf(text[0]), MOVE_LOOKUP.indexOf(text[1])]
+                }
+
+                var blackMoves = ["ea", "oa", "bb", "cb", "db", "eb", "ob", "bc", "dc", "fc", "jc", "qc", "gd", "hd", "nd", "qd", "ge", "ke", "le", "me", "ne", "oe", "ff", "hf", "jf", "nf", "rf", "hg", "og", "pg", "qg", "dj", "ej", "fj", "gj", "jj", "pj", "ak", "ck", "ek", "kk", "pk", "cl", "el", "ll", "nl", "pl", "ql", "dm", "gm", "nm", "om", "qm", "fn", "nn", "rn", "fo", "ko", "lo", "mo", "ro", "cp", "dp", "ep", "fp", "gp", "hp", "ip", "jp", "mp", "qp", "eq", "hq", "kq", "rq", "fr", "qr", "rr"]
+                var whiteMoves = ["fb", "gb", "mb", "nb", "cc", "ec", "hc", "ic", "kc", "bd", "cd", "dd", "ed", "id", "kd", "pd", "he", "ie", "je", "pe", "mf", "of", "mg", "ng", "bh", "ch", "gh", "oh", "ph", "rh", "ai", "di", "ei", "hi", "pi", "bj", "cj", "nj", "qj", "qk", "rl", "cm", "em", "fm", "lm", "pm", "rm", "cn", "en", "mn", "on", "pn", "qn", "co", "eo", "no", "bp", "kp", "lp", "op", "cq", "dq", "fq", "gq", "iq", "jq", "lq", "mq", "nq", "pq", "qq", "dr", "er", "gr", "hr", "pr"]
+
+                for(b in blackMoves) {
+                    console.log(getMoveFromText(blackMoves[b]))
+                    placeStone(getMoveFromText(blackMoves[b]), "black")
+                }
+
+                for(b in whiteMoves) {
+                    placeStone(getMoveFromText(whiteMoves[b]), "white")
+                }
+
+
+                var file = `(;GM[1]FF[4]SZ[19]
+                GN[The famous [myoshu\\]]
+                PC[http://senseis.xmp.net/?Shusai]AP[GoWiki:2009]
+                DT[2009-04-22]
+                C[Diagram from http://senseis.xmp.net/?Shusai
+                
+                The famous [myoshu\\]]
+                PL[W]
+                
+                AB[ea][oa][bb][cb][db][eb][ob][bc][dc][fc][jc][qc][gd][hd][nd][qd][ge][ke][le][me][ne][oe][ff][hf][jf][nf][rf][hg][og][pg][qg][dj][ej][fj][gj][jj][pj][ak][ck][ek][kk][pk][cl][el][ll][nl][pl][ql][dm][gm][nm][om][qm][fn][nn][rn][fo][ko][lo][mo][ro][cp][dp][ep][fp][gp][hp][ip][jp][mp][qp][eq][hq][kq][rq][fr][qr][rr]
+                AW[fb][gb][mb][nb][cc][ec][hc][ic][kc][bd][cd][dd][ed][id][kd][pd][he][ie][je][pe][mf][of][mg][ng][bh][ch][gh][oh][ph][rh][ai][di][ei][hi][pi][bj][cj][nj][qj][qk][rl][cm][em][fm][lm][pm][rm][cn][en][mn][on][pn][qn][co][eo][no][bp][kp][lp][op][cq][dq][fq][gq][iq][jq][lq][mq][nq][pq][qq][dr][er][gr][hr][pr]
+                
+                ;W[hl]C[W1]MN[1]
+                
+                ;
+                )`
+
+
+            </script>
+        </div>
+    </body>
+</html>

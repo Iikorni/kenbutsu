@@ -1,0 +1,156 @@
+[
+    {
+        "nodes": [
+            {
+                "properties": [
+                    {
+                        "name": "FF",
+                        "values": [
+                            "4"
+                        ]
+                    },
+                    {
+                        "name": "C",
+                        "values": [
+                            "root"
+                        ]
+                    }
+                ]
+            }
+        ],
+        "subtrees": [
+            {
+                "nodes": [
+                    {
+                        "properties": [
+                            {
+                                "name": "C",
+                                "values": [
+                                    "a"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "properties": [
+                            {
+                                "name": "C",
+                                "values": [
+                                    "b"
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "subtrees": [
+                    {
+                        "nodes": [
+                            {
+                                "properties": [
+                                    {
+                                        "name": "C",
+                                        "values": [
+                                            "c"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "subtrees": []
+                    },
+                    {
+                        "nodes": [
+                            {
+                                "properties": [
+                                    {
+                                        "name": "C",
+                                        "values": [
+                                            "d"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "properties": [
+                                    {
+                                        "name": "C",
+                                        "values": [
+                                            "e"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "subtrees": []
+                    }
+                ]
+            },
+            {
+                "nodes": [
+                    {
+                        "properties": [
+                            {
+                                "name": "C",
+                                "values": [
+                                    "f"
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "subtrees": [
+                    {
+                        "nodes": [
+                            {
+                                "properties": [
+                                    {
+                                        "name": "C",
+                                        "values": [
+                                            "g"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "properties": [
+                                    {
+                                        "name": "C",
+                                        "values": [
+                                            "h"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "properties": [
+                                    {
+                                        "name": "C",
+                                        "values": [
+                                            "i"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "subtrees": []
+                    },
+                    {
+                        "nodes": [
+                            {
+                                "properties": [
+                                    {
+                                        "name": "C",
+                                        "values": [
+                                            "j"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "subtrees": []
+                    }
+                ]
+            }
+        ]
+    }
+]
